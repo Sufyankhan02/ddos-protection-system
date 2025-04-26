@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON SHIELD | Cyber Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #0ff0fc;
+            --neon-pink: #ff2a6d;
+            --neon-purple: #9d00ff;
+            --dark-bg: #0d0221;
+            --grid-bg: rgba(15, 240, 252, 0.03);
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', 'Orbitron', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            background-image: 
+                linear-gradient(var(--grid-bg) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-bg) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .cyber-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            border-bottom: 1px solid rgba(15, 240, 252, 0.3);
+            background: rgba(13, 2, 33, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 1px solid var(--neon-pink);
+            color: var(--neon-pink);
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logout-btn:hover {
+            background: var(--neon-pink);
+            color: black;
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Cyber Panel Styles */
+        .cyber-panel {
+            background: rgba(13, 2, 33, 0.7);
+            border: 1px solid var(--neon-blue);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 15px rgba(15, 240, 252, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .cyber-panel:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 25px rgba(157, 0, 255, 0.2);
+        }
+
+        .panel-title {
+            color: var(--neon-blue);
+            margin-top: 0;
+            border-bottom: 1px solid rgba(15, 240, 252, 0.3);
+            padding-bottom: 0.5rem;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+
+        /* Blog Post Styles */
+        .blog-post {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed rgba(15, 240, 252, 0.2);
+        }
+
+        .post-title {
+            color: var(--neon-pink);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-meta {
+            color: var(--neon-blue);
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .post-content {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: var(--neon-purple);
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        /* Media Gallery */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .media-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(15, 240, 252, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(15, 240, 252, 0.2);
+            border-color: var(--neon-purple);
+        }
+
+        .media-item img, .media-item video {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .media-caption {
+            padding: 0.8rem;
+            background: rgba(13, 2, 33, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Cyber Status */
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .status-light.warning {
+            background: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="cyber-header">
+        <div class="logo">NEON SHIELD</div>
+        <div class="user-info">
+            <div class="user-avatar" id="userAvatar">A</div>
+            <button class="logout-btn" id="logoutBtn">TERMINATE SESSION</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside>
+            <div class="cyber-panel">
+                <h2 class="panel-title">SYSTEM STATUS</h2>
+                <div class="status-indicator">
+                    <div class="status-light"></div>
+                    <span>DDoS Protection: ACTIVE</span>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-light"></div>
+                    <span>AI Monitoring: RUNNING</span>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-light warning"></div>
+                    <span>Threat Level: LOW</span>
+                </div>
+            </div>
+
+            <div class="cyber-panel">
+                <h2 class="panel-title">QUICK LINKS</h2>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.8rem;">
+                        <a href="#" style="color: var(--neon-blue); text-decoration: none;">Security Protocols</a>
+                    </li>
+                    <li style="margin-bottom: 0.8rem;">
+                        <a href="#" style="color: var(--neon-blue); text-decoration: none;">Network Analytics</a>
+                    </li>
+                    <li style="margin-bottom: 0.8rem;">
+                        <a href="#" style="color: var(--neon-blue); text-decoration: none;">User Management</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <div class="cyber-panel">
+                <h2 class="panel-title">LATEST CYBER NEWS</h2>
+                
+                <div class="blog-post">
+                    <h3 class="post-title">Quantum Encryption Breakthrough</h3>
+                    <div class="post-meta">
+                        <span>Posted: 26.04.2025</span>
+                        <span>Category: Security</span>
+                    </div>
+                    <div class="post-content">
+                        <p>Researchers at Neo-Tokyo Institute have developed a new quantum encryption method that renders traditional DDoS attacks obsolete. The technology uses photon entanglement to create unhackable communication channels.</p>
+                    </div>
+                    <a href="#" class="read-more">READ FULL REPORT →</a>
+                </div>
+
+                <div class="blog-post">
+                    <h3 class="post-title">AI-Powered Threat Detection</h3>
+                    <div class="post-meta">
+                        <span>Posted: 24.04.2025</span>
+                        <span>Category: AI</span>
+                    </div>
+                    <div class="post-content">
+                        <p>Our new neural network algorithms can now predict DDoS attacks with 99.7% accuracy by analyzing micro-patterns in network traffic. Early warning systems give administrators a 15-minute head start.</p>
+                    </div>
+                    <a href="#" class="read-more">READ FULL REPORT →</a>
+                </div>
+            </div>
+
+            <div class="cyber-panel">
+                <h2 class="panel-title">MEDIA GALLERY</h2>
+                
+                <div class="media-grid">
+                    <div class="media-item">
+                        <img src="https://source.unsplash.com/random/600x400/?cyberpunk,neon" alt="Cyber Security">
+                        <div class="media-caption">Quantum Firewall Visualization</div>
+                    </div>
+                    <div class="media-item">
+                        <video controls>
+                            <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4">
+                        </video>
+                        <div class="media-caption">Network Defense Demo</div>
+                    </div>
+                    <div class="media-item">
+                        <img src="https://source.unsplash.com/random/600x400/?data,center" alt="Data Analytics">
+                        <div class="media-caption">Threat Pattern Analysis</div>
+                    </div>
+                    <div class="media-item">
+                        <img src="https://source.unsplash.com/random/600x400/?futuristic,city" alt="Future Tech">
+                        <div class="media-caption">Neo-City Infrastructure</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Set user avatar initial
+        document.getElementById('userAvatar').textContent = 
+            sessionStorage.getItem('username')?.charAt(0).toUpperCase() || 'A';
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            sessionStorage.removeItem('loggedIn');
+            sessionStorage.removeItem('username');
+            window.location.href = '/index.html';
+        });
+
+        // Add interactive effects
+        const panels = document.querySelectorAll('.cyber-panel');
+        panels.forEach(panel => {
+            panel.addEventListener('mousemove', (e) => {
+                const rect = panel.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                panel.style.boxShadow = `
+                    ${(x - rect.width/2) / 10}px ${(y - rect.height/2) / 10}px 30px rgba(15, 240, 252, 0.2)
+                `;
+            });
+            
+            panel.addEventListener('mouseleave', () => {
+                panel.style.boxShadow = '0 0 15px rgba(15, 240, 252, 0.1)';
+            });
+        });
+    </script>
+</body>
+</html>

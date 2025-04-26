@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON SHIELD | Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #0ff0fc;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0d0221;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .cyber-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .cyber-card {
+            width: 380px;
+            background: rgba(13, 2, 33, 0.8);
+            border: 1px solid var(--neon-blue);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 0 15px var(--neon-blue);
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--neon-blue);
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--neon-pink);
+            border-radius: 5px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .cyber-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+            border: none;
+            border-radius: 5px;
+            color: black;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 20;
+        }
+
+        .security-status {
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--neon-blue);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-container">
+        <div class="cyber-card">
+            <div class="logo">NEON SHIELD</div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">USER ID</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">ACCESS CODE</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="cyber-btn">AUTHENTICATE</button>
+            </form>
+            <div class="security-status">
+                DDoS PROTECTION ACTIVE | AI BEHAVIOR ANALYSIS RUNNING
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form handling
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation
+            if(username && password) {
+                sessionStorage.setItem('loggedIn', 'true');
+                sessionStorage.setItem('username', username);
+                window.location.href = '/dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>

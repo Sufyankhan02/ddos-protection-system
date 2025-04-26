@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: ddos-protected-site
+    runtime: node
+    buildCommand: |
+      cd protected-website
+      npm install
+    startCommand: |
+      cd protected-website
+      node server.js
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://khansufyan8408896553:e9i3yAWl7zlWpuk6@cluster0.vmqovat.mongodb.net/ddos-protection?retryWrites=true&w=majority
+
+  - type: web
+    name: ddos-vulnerable-site
+    runtime: node
+    buildCommand: |
+      cd vulnerable-website
+      npm install
+    startCommand: |
+      cd vulnerable-website
+      node server.js
+    envVars:
+      - key: PORT
+        value: 5000  # Different port than protected site

@@ -1,0 +1,12 @@
+{
+    "name": "ddos-vulnerable-website",
+    "version": "1.0.0",
+    "description": "A website vulnerable to DDoS attacks for demonstration purposes",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.17.1"
+    }
+  }

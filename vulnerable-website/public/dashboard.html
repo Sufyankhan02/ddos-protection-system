@@ -1,0 +1,103 @@
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        .user-info span {
+            margin-right: 10px;
+        }
+        .logout-btn {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .container {
+            padding: 20px;
+        }
+        .post {
+            background: white;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .post h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .post img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Vulnerable Website</div>
+        <div class="user-info">
+            <span>Welcome, <span id="usernameDisplay"></span></span>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </div>
+    </header>
+    <div class="container">
+        <div class="post">
+            <h2>About This Website</h2>
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Technology">
+            <p>This website is intentionally vulnerable to DDoS attacks for demonstration purposes. It has no protection mechanisms in place.</p>
+            <p>In the next part of our project, we'll show how to protect against these attacks by analyzing human behavior patterns.</p>
+        </div>
+        <div class="post">
+            <h2>What is a DDoS Attack?</h2>
+            <p>A Distributed Denial-of-Service (DDoS) attack is a malicious attempt to disrupt normal traffic of a targeted server, service or network by overwhelming the target or its surrounding infrastructure with a flood of Internet traffic.</p>
+            <p>In our demonstration, we'll use the Slowloris attack which works by holding as many connections to the target web server open for as long as possible.</p>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        if(!sessionStorage.getItem('loggedIn')) {
+            window.location.href = 'index.html';
+        }
+        
+        // Display username
+        document.getElementById('usernameDisplay').textContent = sessionStorage.getItem('username');
+        
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            sessionStorage.removeItem('loggedIn');
+            sessionStorage.removeItem('username');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
