@@ -1,38 +1,19 @@
-let behaviorData = {
-    mouseMovements: [],
-    typingPattern: []
-  };
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
   
-  // Track mouse movements
-  document.addEventListener('mousemove', (e) => {
-    behaviorData.mouseMovements.push({
-      x: e.clientX,
-      y: e.clientY,
-      t: Date.now()
-    });
+  const response = await fetch('/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      username: document.getElementById('username').value,
+      password: document.getElementById('password').value
+    })
   });
-  
-  // Track typing
-  document.querySelector('input').addEventListener('keydown', (e) => {
-    behaviorData.typingPattern.push({
-      key: e.key,
-      time: Date.now()
-    });
-  });
-  
-  // Send with login form
-  document.getElementById('loginForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    fetch('/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        username: document.getElementById('username').value,
-        password: document.getElementById('password').value,
-        behaviorData: behaviorData
-      })
-    }).then(res => res.json())
-      .then(data => {
-        if (data.success) window.location.href = '/dashboard.html';
-      });
-  });
+
+  const result = await response.json();
+  if (result.success) {
+    window.location.href = '/dashboard';
+  } else {
+    alert('Login failed - use admin/cyber2025');
+  }
+});
